@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>336 Ec project</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Extra Credit Project</h1>
+        <small>By: Soma, Syona, Rhemie, Saksham</small>
+
+        <!-- Query Input Form -->
+        <form method="POST">
+            <label for="query-input">Enter your query: </label>
+            <input type="text" name="query" id="query-input" placeholder="Type your query" value="{{ query or '' }}">
+            <button type="submit">Submit</button>
+        </form>
+
+        {% if sql_query %}
+            <div class="output">
+                <h2>SQL Query:</h2>
+                <pre>{{ sql_query }}</pre>
+
+                <h2>LLM Output:</h2>
+                <pre>{{ llm_output }}</pre>
+
+                <h2>Query Results:</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in results %}
+                            <tr>
+                                <td>{{ row.name }}</td>
+                                <td>{{ row.email }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
